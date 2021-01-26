@@ -1,5 +1,4 @@
 #include "board.h"
-
 int turn = 0 ;
 
 
@@ -8,14 +7,11 @@ Board::Board (char *argv[], int argc, QPixmap *empty, QPixmap *circle, QPixmap *
 	int i, j;
 	this->server=NULL;
 	this->client=NULL;
-
-
 	this->gameType=TYPE_LOCAL;
 	this->game=1;
 
-
 	QGridLayout *layout=new QGridLayout (this);
-    layout->setSpacing (0);//폴리 키 사이 1 픽셀의 거리
+    layout->setSpacing (0);
 
     this->items=new Item**[MAX_Y];// 행렬에 대한 포인터 (addWidget으로 인해)가있는 2 차원 배열의 동적 할당
     for (i=0;i<MAX_Y;i++){   //행렬저장
@@ -42,7 +38,7 @@ Board::Board (char *argv[], int argc, QPixmap *empty, QPixmap *circle, QPixmap *
 }
 
 
-void Board::unHighlight (void)//변경 필요 이전턴꺼 하이라이트지움
+void Board::unHighlight (void)//변경 필요 이전턴꺼 하이라이트 지움
 {
 	if (this->moves.size()>0){
         if (turn ==1 && this->activeType==Item::TYPE_CIRCLE){ //TYPE_CIRCLE:흑돌
@@ -70,6 +66,7 @@ void Board::addItem_net (const int &x, const int &y)
 
 void Board::addItem (const int &x, const int &y)
 {
+
 	if (x<MAX_X && y<MAX_Y && x>-1 && y>-1){
 		int i;
 		Item::Type t=this->activeType;
@@ -104,7 +101,7 @@ void Board::addItem (const int &x, const int &y)
             this->activeType=Item::TYPE_CIRCLE;
             turn -= 1;
         }
-        //if문을 여기다가 써봐
+
         emit this->statusChanged (activeType); //턴넘기기
 
 

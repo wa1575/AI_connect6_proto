@@ -14,7 +14,7 @@ bool Server::start ()
     this->tcpServer = new QTcpServer (this);//서버 생성
 	this->tcpServer->setMaxPendingConnections(1);
 
-    if (!this->tcpServer->listen (QHostAddress::Any, this->port)){//주어진 포트가 활용 가능한지 테스트
+    if (!this->tcpServer->listen (QHostAddress::Any, this->port)){//주어진 포트가 활용 가능한지 우선 확인해야함
 		QMessageBox::critical(NULL, "Tic Tac Toe Server", "Unable to start the server, this port isn't available.");
 		this->dropConnection ();
 		cout << "Unable to start the server, this port isn't available." << endl;

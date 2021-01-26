@@ -9,34 +9,42 @@ MainWindow::MainWindow(char *argv[], int argc, QWidget *parent) : QMainWindow (p
     this->circle=new QPixmap (":/images/black.png"); //white
     this->cross=new QPixmap (":/images/white.png");  //black
 	this->empty=new QPixmap (":/images/empty.png");
+    this->black1 = new QPixmap (":images/black1.png");
+    this->white1 = new QPixmap (":/images/white1.png");
+    this->black2 = new QPixmap (":images/black2.png");
+    this->white2 = new QPixmap (":/images/white2.png");
+    this->black3 = new QPixmap (":images/black3.png");
+    this->white3 = new QPixmap (":/images/white3.png");
+    this->blackcow = new QPixmap(":/images/blackcow.jpg");
+    this->whitecow = new QPixmap(":/images/whitecow.jpg");
 
-	this->setMinimumSize(26*MAX_X+80,26*MAX_Y+110);
+    this->setMinimumSize(26*MAX_X+50,26*MAX_Y+100);
 	this->array=new Board (argv, argc, empty, circle, cross, this);
 	this->ui->gridLayout->addWidget(array,2,0);
-	this->ui->gridLayout->setRowMinimumHeight (2, 26*MAX_Y);
-	this->ui->gridLayout->setColumnMinimumWidth(0, 26*MAX_X);
-	this->ui->label_turn->setFixedHeight(25);
-	this->ui->label_turn->setFixedWidth(25);
+    this->ui->gridLayout->setRowMinimumHeight (2, 26*MAX_Y);
+    this->ui->gridLayout->setColumnMinimumWidth(0, 26*MAX_X);
+    this->ui->label_turn->setFixedHeight(75);
+    this->ui->label_turn->setFixedWidth(75);
 	this->ui->label_color->setFixedHeight(25);
 	this->ui->label_color->setFixedWidth(25);
 	this->ui->label_turn->setScaledContents(1);
 	this->ui->label_color->setScaledContents(1);
-	//this->ui->pushButton->setMaximumWidth(100);
+
 
 	this->ui->label_score->setAlignment(Qt::AlignCenter);
 	this->ui->label_score_black->setAlignment(Qt::AlignCenter);
 	this->ui->label_score_white->setAlignment(Qt::AlignCenter);
 
-	this->ui->label_4->setPixmap(*circle);
-	this->ui->label_5->setPixmap(*cross);
+    this->ui->label_4->setPixmap(*blackcow);//*circle
+    this->ui->label_5->setPixmap(*whitecow); //*cross
 
     //창제목 설정
 	if ((argc==3) && (QString(argv[1])=="server")){
-        this->setWindowTitle("Connect Six Game Server");
+        this->setWindowTitle("[BoB9]Connect Six Game Server");
 	}else if ((argc==4) && (QString(argv[1])=="client")){
-        this->setWindowTitle("Connect Six Game Client");
+        this->setWindowTitle("[BoB9]Connect Six Game Client");
 	}else{
-        this->setWindowTitle("Connect Six Game");
+        this->setWindowTitle("[BoB9]Connect Six Game");
 	}
 
 	connect (this->array, SIGNAL (statusChanged (int)), this, SLOT (displayStatus (const int&)));
@@ -74,7 +82,7 @@ void MainWindow::startNetworkGame(){
 
 	bool ok;
 	port = QInputDialog::getInt(this, tr("Server port number"),
-								tr("Server port number:"), 4000, 0, 65535 ,1, &ok);
+                                tr("Server port number:"), 8089, 0, 65535 ,1, &ok);
 
 	if (ok == false){
 		return;
@@ -129,7 +137,7 @@ void MainWindow::ConnectToGame(){
 											tr("Server IP address:"), QLineEdit::Normal,
 											"127.0.0.1", &ok1);
 	port = QInputDialog::getInt(this, tr("Server port number"),
-									tr("Server port number:"), 4000, 0, 65535, 1, &ok2);
+                                    tr("Server port number:"), 8089, 0, 65535, 1, &ok2);
 
 	if (ok1 && ok2 && !address.isEmpty() && port!=0){
 		if(!hostname.setAddress (address)){
@@ -178,11 +186,12 @@ void MainWindow::setStatusBar (const int &x)
 		this->ui->statusBar->showMessage ("Peer connected");
 
 		if (this->array->activeType==Item::TYPE_CIRCLE){
-			this->ui->label_turn->setPixmap (*circle);
+            this->ui->label_turn->setPixmap (*circle);//white
 		}else{
-			this->ui->label_turn->setPixmap (*cross);
+            this->ui->label_turn->setPixmap (*cross);//black
+            //this->ui->label_turn->setPixmap (*black1);
 		}
-		this->ui->label_2->setText ("Plays ");
+        this->ui->label_2->setText ("Turns ");
 
 		break;
 	case 2:
@@ -190,15 +199,17 @@ void MainWindow::setStatusBar (const int &x)
 		break;
 
 	case 3:
-		this->ui->statusBar->showMessage ("White won");
+        this->ui->statusBar->showMessage ("Black won");//White won
 		this->ui->label_score_white->setText(QString::number (array->score[0]));
-		//QMessageBox::information(NULL, "White won", "White won");
+        this->ui->label_turn->setPixmap (*black3);
+        QMessageBox::information(NULL, "Black won", "Black WIN");
 		break;
 
 	case 4:
-		this->ui->statusBar->showMessage ("Black won");
+        this->ui->statusBar->showMessage ("White won");//Black won
 		this->ui->label_score_black->setText (QString::number (array->score[1]));
-		//QMessageBox::information(NULL, "Black won", "Black won");
+        this->ui->label_turn->setPixmap (*white3);
+        QMessageBox::information(NULL, "White won", "White WIN");
 		break;
 
 	case 5:
@@ -221,12 +232,14 @@ void MainWindow::displayStatus (const int &event)
 {
 	switch (event){
 	case 1:
-		this->ui->label_turn->setPixmap (*circle);
-		this->ui->label_2->setText ("Plays ");
+        //this->ui->label_turn->setPixmap (*circle);
+        this->ui->label_turn->setPixmap (*black1);
+        this->ui->label_2->setText ("Black's Turn.");
 		break;
 	case 2:
-		this->ui->label_turn->setPixmap (*cross);
-		this->ui->label_2->setText ("Plays ");
+        //this->ui->label_turn->setPixmap (*cross);
+        this->ui->label_turn->setPixmap (*white1);
+        this->ui->label_2->setText ("White's Turn.");
 		break;
 	case 7:
 		this->ui->statusBar->showMessage ("");
@@ -246,7 +259,7 @@ void MainWindow::displayStatus (const int &event)
 	default:
 		this->ui->label_turn->clear();
 		this->ui->label_2->clear ();
-		this->ui->label_6->setText ("Game Over");
+        //this->ui->label_6->setText ("Game Over");
 		this->ui->label_3->clear();
 		this->setStatusBar (event);
 	}
@@ -265,4 +278,6 @@ MainWindow::~MainWindow ()
 {
 	delete ui;
 }
+
+
 

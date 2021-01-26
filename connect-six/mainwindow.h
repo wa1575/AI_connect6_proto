@@ -3,8 +3,6 @@
 
 /*! \class MainWindow
  *  \brief MainWindow
- *
- *  창과 창 자체의 모든 위젯을 렌더링하는 데 사용됩니다.
  */
 
 #include <QMainWindow>
@@ -36,7 +34,7 @@ public:
     */
 
 
-	explicit MainWindow(char *argv[], const int argc, QWidget *parent = NULL);//explicit zabrani implicitnimu pretypovani
+    explicit MainWindow(char *argv[], const int argc, QWidget *parent = NULL);
 	~MainWindow();
 
 
@@ -65,6 +63,12 @@ public slots:
 	void ConnectToGame();
 	void startNetworkGame();
 
+
+private slots:
+   // void on_lineEdit_cursorPositionChanged(int arg1, int arg2);
+
+
+
 private:
 
     /*!
@@ -92,6 +96,14 @@ private:
 	QPixmap *circle;
 	QPixmap *cross;
 	QPixmap *empty;
+    QPixmap *black1;
+    QPixmap *white1;
+    QPixmap *black2;
+    QPixmap *black3;
+    QPixmap *white2;
+    QPixmap *white3;
+    QPixmap *blackcow;
+    QPixmap *whitecow;
 
 
 };

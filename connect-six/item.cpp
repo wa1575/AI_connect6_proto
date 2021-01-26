@@ -4,7 +4,7 @@
 Item::Item(const int &y, const int &x, QPixmap *empty, Board *parent)
 {
 
-	setPalette(QPalette (QColor ("#d0a343")));
+    setPalette(QPalette (QColor ("#ffc74f")));//d0a343
 	setAutoFillBackground(true);
 
 	this->x=x;

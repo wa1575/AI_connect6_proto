@@ -5,5 +5,13 @@
         <file>images/white.png</file>
         <file>images/white_highlighted.png</file>
         <file>images/black_highlighted.png</file>
+        <file>images/black1.png</file>
+        <file>images/white1.png</file>
+        <file>images/black3.png</file>
+        <file>images/white3.png</file>
+        <file>images/black2.png</file>
+        <file>images/white2.png</file>
+        <file>images/blackcow.jpg</file>
+        <file>images/whitecow.jpg</file>
     </qresource>
 </RCC>

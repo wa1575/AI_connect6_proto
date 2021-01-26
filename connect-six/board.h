@@ -7,8 +7,6 @@
  *  플레이 영역
  */
 
-
-
 #include <QWidget>
 #include <QGridLayout>
 #include <iostream>
