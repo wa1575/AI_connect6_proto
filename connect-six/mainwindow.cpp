@@ -274,10 +274,40 @@ void MainWindow::buttonPressHandle (const int &x)
 	this->ui->actionReset_Game->setEnabled ((bool)x);
 }
 
+
+void MainWindow::on_textEdit_textChanged()
+{
+   this ->ui -> textEdit->append(QString::number (this->array->gamedata.x));
+   this -> ui -> textEdit->append(QString::number (this->array->gamedata.y));
+}
+
+
+
+
+void MainWindow::on_checkBox_stateChanged(int arg1)
+{
+    this->array->AImode[0]=1;
+    this->ui->statusBar->showMessage ("Black AI mode ON");
+}
+
+void MainWindow::on_checkBox_2_stateChanged(int arg1)
+{
+    this->array->AImode[1]=1;
+    this->ui->statusBar->showMessage ("White AI mode ON");
+
+}
+
+
+void MainWindow::on_quitButton_clicked()
+{
+  close();
+}
+
 MainWindow::~MainWindow ()
 {
 	delete ui;
 }
+
 
 
 

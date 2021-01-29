@@ -57,7 +57,7 @@ bool Server::parseMessage ()
 		QMessageBox::critical (NULL, "Tic Tac Toe Server", "Client don't use our protocol!");
 		return false;
 	}
-	//aby se mohli posilat ruzny kody doplnit do additemu(nebo neceho jinyho) i signal na novou hru
+    //다양한 코드 전송가능
 
 	switch (p[0].toInt()){
 	case 100:

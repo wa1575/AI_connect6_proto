@@ -13,6 +13,8 @@
 #include "item.h"
 #include "server.h"
 #include "client.h"
+#include "stdafx.h"
+
 
 using namespace std;
 
@@ -21,11 +23,19 @@ using namespace std;
 #define MAX_Y 19
 #define MAX_ITEMS MAX_Y*MAX_X
 
+typedef struct{
+    int x,y;
+    //int win;//0:game running, 1:client1 win ,2:client2 win
+    //int turn;//1:client1 turn ,2:client2 turn
+}GAME_DATA;
 
-
+class MainWindow;
+class AI;
 
 class Board : public QWidget
 {
+    friend class AI;
+    friend class MainWindow;
 	friend class Item;
     Q_OBJECT
 public:
@@ -66,8 +76,10 @@ public:
 	enum gameType{
 		TYPE_LOCAL=0,
 		TYPE_SERVER=1,
-		TYPE_CLIENT=2
-	};
+        TYPE_CLIENT=2,
+        TYPE_WAI=3,
+        TYPE_BAI=4
+    };
 
 	explicit Board (char *argv[], int argc, QPixmap *, QPixmap *, QPixmap *, QWidget  *parent = NULL);
 	~Board ();
@@ -77,8 +89,21 @@ public:
 	Item::Type activeType;
 	Server *server;
 	Client *client;
+    AI *ai;
 
 	int score[2];
+    int AImode[2];
+    //QList <QPair <int, int> > moved;
+    int wmoved[20][20] = {};
+    int bmoved[20][20] = {};
+
+    //MainWindow * w;
+    GAME_DATA gamedata;
+
+    QList <QPair <int, int> > moves;
+    QList <QPair <int, int> > pentad;
+
+
 
 signals:
 
@@ -121,6 +146,7 @@ public slots:
 	void reset (void);
 	void reset_net (void);
 	void addItem_net (const int &, const int &);
+    void addItem (const int&, const int&);
 	void setGame (const int&);
 	void moveBack (void);
 	void moveBackClicked (void);
@@ -180,18 +206,17 @@ private:
      */
 
 	bool testwin (const int&, const int&);
-	void addItem (const int&, const int&);
+    //void addItem (const int&, const int&);
 	void unHighlight (void);
 
 
 	Item::Type win;
 	Item::Type firstPlayer;
 
-	QList <QPair <int, int> > moves;
-	QList <QPair <int, int> > pentad;
+    //QList <QPair <int, int> > moves;
+    //QList <QPair <int, int> > pentad;
 
 	Item *** items;
-
 	QPixmap *circle;
 	QPixmap circleHighlighted;
 	QPixmap *cross;

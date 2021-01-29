@@ -9,13 +9,14 @@
 
 #include <QLabel>
 
-//dopredna deklarace
 class Board;
+class AI;
 
 class Item : public QLabel
 {
+    friend class AI;
 	friend class Board;
-	Q_OBJECT //kvuli slotum (connect je metoda QObjectu)
+    Q_OBJECT
 public:
 
     /*!
@@ -30,14 +31,14 @@ public:
     *  하나의 필드를 초기화하고 필요한 변수를 설정합니다.
     *
     *  \param[in] y 필드의 좌표입니다.
-    *  \param[in] x je 필드의 좌표입니다.
+    *  \param[in] x 필드의 좌표입니다.
     *  \param[in] 부모 세트를 통해 Qt 자체가 부모 클래스를 삭제할 때 객체 할당 해제를 처리합니다.
     */
-	enum Type{
-		TYPE_EMPTY=0,
-		TYPE_CIRCLE=1,
-		TYPE_CROSS=2
-	};
+    enum Type{
+        TYPE_EMPTY=0,
+        TYPE_CIRCLE=1,
+        TYPE_CROSS=2
+    };
 
 	explicit Item (const int &, const int &, QPixmap *, Board *parent = NULL);
 
@@ -74,9 +75,9 @@ private:
 	void clear (void);
 
 	int x,y;
-	Type type;
+    Type type;
 	Board* parentPtr;
-	QPixmap * empty;
+    QPixmap * empty;
 	
 
 };

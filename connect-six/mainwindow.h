@@ -10,14 +10,19 @@
 #include "board.h"
 #include <QString>
 #include <QInputDialog>
+#include "stdafx.h"
 
 namespace Ui {
 	class MainWindow;
 }
 
+class Board;
 class MainWindow : public QMainWindow
 {
+    friend class Board;
     Q_OBJECT
+
+
 
 public:
 
@@ -32,8 +37,6 @@ public:
     *  \fn ~MainWindow()
     *  \brief 소멸자
     */
-
-
     explicit MainWindow(char *argv[], const int argc, QWidget *parent = NULL);
 	~MainWindow();
 
@@ -59,15 +62,23 @@ public slots:
 	void setStatusBar (const int&);
 	void buttonPressHandle (const int&);
 
-
 	void ConnectToGame();
-	void startNetworkGame();
+    void startNetworkGame();
 
+    void on_textEdit_textChanged();
+
+    void on_checkBox_stateChanged(int arg1);
+
+    void on_checkBox_2_stateChanged(int arg1);
 
 private slots:
    // void on_lineEdit_cursorPositionChanged(int arg1, int arg2);
 
 
+
+
+
+    void on_quitButton_clicked();
 
 private:
 

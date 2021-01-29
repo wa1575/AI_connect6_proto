@@ -23,7 +23,7 @@ void Item::mousePressEvent (QMouseEvent *)
 	if ((this->type==TYPE_EMPTY) && parentPtr->game){
 		switch (parentPtr->gameType){
 			case Board::TYPE_LOCAL:
-                this->parentPtr->addItem (this->x, this->y);
+                this->parentPtr->addItem (this->x, this->y);              
                 break;
 
 

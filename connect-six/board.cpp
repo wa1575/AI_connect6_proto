@@ -2,6 +2,7 @@
 int turn = 0 ;
 
 
+
 Board::Board (char *argv[], int argc, QPixmap *empty, QPixmap *circle, QPixmap *cross, QWidget *parent) : QWidget(parent)
 {
 	int i, j;
@@ -9,6 +10,9 @@ Board::Board (char *argv[], int argc, QPixmap *empty, QPixmap *circle, QPixmap *
 	this->client=NULL;
 	this->gameType=TYPE_LOCAL;
 	this->game=1;
+    this->gamedata.x = 0;
+    this->gamedata.y = 0;
+    this->ai = new AI(i, j, empty, this);
 
 	QGridLayout *layout=new QGridLayout (this);
     layout->setSpacing (0);
@@ -32,6 +36,16 @@ Board::Board (char *argv[], int argc, QPixmap *empty, QPixmap *circle, QPixmap *
 	this->cross=cross;
 	this->score[0]=0;
 	this->score[1]=0;
+
+    this->AImode[0]=0;
+    this->AImode[1]=0;
+    for(i=0; i <20 ; i++)
+    {
+        for(j=0; j <20; j++){
+        this->wmoved[i][j]=0;
+        this->bmoved[i][j]=0;
+        }
+    }
 
     circleHighlighted.load(":/images/black_highlighted.png");
     crossHighlighted.load(":/images/white_highlighted.png");//images/black_highlighted.png
@@ -76,28 +90,36 @@ void Board::addItem (const int &x, const int &y)
         this->unHighlight ();
         this->moves.append(QPair <int, int>(x, y));
 
+        //this->w->on_textEdit_textChanged();
+
         if (turn == 0 && t==Item::TYPE_CIRCLE){//TYPE_CIRCLE:흑돌
 			this->items[y][x]->setPixmap(circleHighlighted);
+            this->ai->b[x][y] = 2;
             this->activeType=Item::TYPE_CROSS;
             turn += 1;
-        }else if (turn == 0 && t==Item::TYPE_CROSS) {
+        }else if (turn == 0 && t==Item::TYPE_CROSS) {//TYPE_CROSS 백돌
 			this->items[y][x]->setPixmap(crossHighlighted);
+            this->ai->w[x][y] = 2;
             this->activeType=Item::TYPE_CIRCLE; //TYPE_CIRCLE
             turn += 1;
         }else if (turn == 1 && t==Item::TYPE_CIRCLE){//TYPE_CIRCLE:흑돌
-                this->items[y][x]->setPixmap(circleHighlighted);
-                this->activeType=Item::TYPE_CIRCLE;
-                turn += 1;
+            this->items[y][x]->setPixmap(circleHighlighted);
+            this->ai->b[x][y] = 2;
+            this->activeType=Item::TYPE_CIRCLE;
+            turn += 1;
         } else if (turn == 1 && t==Item::TYPE_CROSS) {
-                this->items[y][x]->setPixmap(crossHighlighted);
-                this->activeType=Item::TYPE_CROSS; //TYPE_CIRCLE
-                turn +=1 ;
+            this->items[y][x]->setPixmap(crossHighlighted);
+            this->ai->w[x][y] = 2;
+            this->activeType=Item::TYPE_CROSS; //TYPE_CIRCLE
+            turn +=1 ;
         }else if (turn ==2 && t==Item::TYPE_CIRCLE){
             this->items[y][x]->setPixmap(circleHighlighted);
+            this->ai->b[x][y] = 2;
             this->activeType=Item::TYPE_CROSS;
             turn -= 1;
         }else{
             this->items[y][x]->setPixmap(crossHighlighted);
+            this->ai->w[x][y] = 2;
             this->activeType=Item::TYPE_CIRCLE;
             turn -= 1;
         }
@@ -363,3 +385,6 @@ Board::~Board ()
 	}
 	delete [] this->items;
 }
+
+
+
