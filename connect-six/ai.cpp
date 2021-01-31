@@ -23,20 +23,19 @@ AI::AI(const int &y, const int &x, QPixmap *empty, Board *parent)
                 this->w[i][j] = 0;
             }
         }
-    /*
+
         for(i=0; i<19; i++)
         {
             this->b[i][19] = 3;
             this->w[i][19] = 3;
         }
-        */
+
 
 }
 
 void AI::insertAI_W()
 {
      W_AI_allcheck();//작동안함? 왜?
-    //if ((this->type==TYPE_EMPTY) && this->parentPtr->game && this->parentPtr->AImode[1]==1 && this->parentPtr->activeType==TYPE_CROSS){
         switch (this->parentPtr->gameType){//로컬,서버,클라이언트모드
             case Board::TYPE_LOCAL:
                 this->parentPtr->addItem (this->wx, this->wy);//x,y좌표 그대로 넣으면 됨
@@ -162,13 +161,13 @@ void AI::change_b(int c, int d)
 
 
 
-void AI::W_AI_allcheck()//뭐가문제일까
-{
-    for(int x_new=0; x_new<19; x_new++) // 모든 가중치배열좌표값을 0으로 초기화
+void AI::W_AI_allcheck()//킬각을 못봄
+{   //가중치 초기화
+    for(int x_new=0; x_new<19; x_new++)
         {
             for(int y_new=0; y_new<19; y_new++)
             {
-                act[x_new][y_new] = 0;		//가중치배열 0으로 초기화.
+                act[x_new][y_new] = 0;
                 if( w[x_new][y_new] == 2 )
                 {
                     newwhite[x_new][y_new] = 2;
@@ -269,8 +268,7 @@ void AI::W_AI_5_6_7_check()
               {
 
             if(turn == 1)	//첫 번째 턴일때만 적용되는 함수. 4개를 5개로 만들거나 4개가있으면 한쪽을 막음.
-            {				//단 이길수있는상황에만 4개를 5개로 만들게함.
-                            //X 는 !2 이다. 즉 2가 아니라고 명시한 것.
+            {				//단 이길수있는상황에만 4개를 5개로 만들게함.                
                 //첫째턴, 6개까지 만들 여지가 있을 경우 & 가로
                 if( newwhite[x][y] == 0 && newwhite[x][y+1] == 2 && newwhite[x][y+2] == 2 && newwhite[x][y+3] == 2 && newwhite[x][y+4] == 2 &&
                     newwhite[x][y+5] == 2 )
@@ -351,7 +349,7 @@ void AI::W_AI_5_6_7_check()
                     newwhite[x+5][y-5] == 2 )
                     act[m][n] += 45000000;	//222022
             }
-            //1222221
+            //1222221, 양쪽이 막힌 경우 의미없다...
             if( newwhite[x][y] == 1 && newwhite[x][y+1] == 2 && newwhite[x][y+2] == 2 && newwhite[x][y+3] == 2 && newwhite[x][y+4] == 2 &&
                 newwhite[x][y+5] == 2 && newwhite[x][y+6] == 1 )
                 act[m][n] = 0;
@@ -364,8 +362,8 @@ void AI::W_AI_5_6_7_check()
             if( newwhite[x][y] == 1 && newwhite[x+1][y-1] == 2 && newwhite[x+2][y-2] == 2 && newwhite[x+3][y-3] == 2 && newwhite[x+4][y-4] == 2 &&
                 newwhite[x+5][y-5] == 2 && newwhite[x+6][y-6] == 1 )
                 act[m][n] = 0;
-                            //양쪽다막힌 양쪽모두 막힌 곳에 돌을 5개로 만드는 것은 점수필요없음.
-            //222222가로로 이길수있을때
+
+            //222222가로로 이길수있을때...킬각재기 잘 안됨
             if( newwhite[x][y] == 2 && newwhite[x][y+1] == 2 && newwhite[x][y+2] == 2 && newwhite[x][y+3] == 2 && newwhite[x][y+4] == 2 &&
                 newwhite[x][y+5] == 2 )
                 act[m][n] += 99999999;

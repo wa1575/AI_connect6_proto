@@ -72,10 +72,6 @@ public slots:
     void on_checkBox_2_stateChanged(int arg1);
 
 private slots:
-   // void on_lineEdit_cursorPositionChanged(int arg1, int arg2);
-
-
-
 
 
     void on_quitButton_clicked();

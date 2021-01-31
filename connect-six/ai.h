@@ -28,7 +28,6 @@ class AI : public QLabel
     friend class Item;
     Q_OBJECT
 public:
-    //AI();
     enum gameType{
         TYPE_LOCAL=0,
         TYPE_SERVER=1,
@@ -45,15 +44,7 @@ public:
 
     QList <QPair <int, int> > moves;
     QList <QPair <int, int> > pentad;
-
-    int bxaxis[360], byaxis[360], wxaxis[360], wyaxis[360];
-    bool bwin(int one);
-    bool wwin(int two);
     int b[20][20], w[20][20]; //가중치
-
-    int wcnt2,wcnt3,wcnt4,wcnt5;
-    int bcnt2,bcnt3, bcnt4, bcnt5;
-    int tempbx, tempby, tempwx, tempwy;
 
 
     void W_AI_allcheck();
@@ -112,9 +103,6 @@ public:
     void defense_in_slash_check_B();
 
 
-
-
-   //수정필요
     void insertAI_W();
     void insertAI_B();
     void firstdol_B();
@@ -142,33 +130,14 @@ signals:
 
 public slots:
 
-    //void bsituation();
-    //void wsituation();
-    //void prn();
 
-  /*
-    void insertblack(MySocket *player,int gameMode);
-    void insertwhite(MySocket *player,int gameMode);
-    void firstdol_B(MySocket *player,int gameMode);
-
-    bool draw(int zero);
-    int winner();
-
-    */
 
 private:
 
     bool testwin (const int&, const int&);
     void addItem (const int&, const int&);
     void unHighlight (void);
-    //void mousePressEvent (QMouseEvent *);
     void clear (void);
-
-    //Item::Type win;
-    //Item::Type firstPlayer;
-
-    //QList <QPair <int, int> > moves;
-    //QList <QPair <int, int> > pentad;
 
     Item *** items;
     QPixmap *empty;
@@ -178,19 +147,9 @@ private:
     Board* parentPtr;
     Type type;
 
-    typedef struct{
-        int x,y;
-        //int win;//0:game running, 1:client1 win ,2:client2 win
-        //int turn;//1:client1 turn ,2:client2 turn
-    }GAME_DATA;
 
-    // AI 부분 //
-
-
-
-    int ga, se, i, j, z, q, e, bx, by, wx, wy, n; // i, j는 display, wx, bx, by, wy, n는 setdol에서 사용. ga : 가로, se : 세로
-    //int win; //0:game running, 1:sever win ,2:client win
-    // AI 부분 //
+    // AI 변수
+    int i, j, z, bx, by, wx, wy, n;
     int actpnt; // AI 활동 가중치 변수
     int maxactpnt; // 2차원 배열의 가중치 최대값을 저장하는 변수
     long int act[19][19];	//좌표마다 가중치 점수 저장하는 배열

@@ -25,8 +25,8 @@ using namespace std;
 
 typedef struct{
     int x,y;
-    //int win;//0:game running, 1:client1 win ,2:client2 win
-    //int turn;//1:client1 turn ,2:client2 turn
+    //나중에 프로토콜에 필요한 거 저장
+    //EX) int turn;//1:client1 turn ,2:client2 turn
 }GAME_DATA;
 
 class MainWindow;
@@ -93,14 +93,12 @@ public:
 
 	int score[2];
     int AImode[2];
-    //QList <QPair <int, int> > moved;
     int wmoved[20][20] = {};
     int bmoved[20][20] = {};
     int bturn = 0 ;
     int wturn = 0 ;
     int turn = 0 ;
 
-    //MainWindow * w;
     GAME_DATA gamedata;
 
     QList <QPair <int, int> > moves;
@@ -209,15 +207,12 @@ private:
      */
 
 	bool testwin (const int&, const int&);
-    //void addItem (const int&, const int&);
 	void unHighlight (void);
 
 
 	Item::Type win;
 	Item::Type firstPlayer;
 
-    //QList <QPair <int, int> > moves;
-    //QList <QPair <int, int> > pentad;
 
 	Item *** items;
 	QPixmap *circle;

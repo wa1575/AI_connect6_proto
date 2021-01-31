@@ -45,7 +45,6 @@ void Item::mousePressEvent (QMouseEvent *)
                     this->childPtr->insertAI_B();
                     break;
                 }
-
                 else{
                 this->parentPtr->addItem (this->x, this->y);
                 break;

@@ -286,16 +286,31 @@ void MainWindow::on_textEdit_textChanged()
 
 void MainWindow::on_checkBox_stateChanged(int arg1)
 {
+    if(this->ui->checkBox->isChecked() == true ){
     this->array->AImode[0]=1;
     this->ui->statusBar->showMessage ("Black AI mode ON");
+    }
+
+    else{
+        this->array->AImode[0]=0;
+        this->ui->statusBar->showMessage ("Black AI mode OFF");
+    }
 }
 
 void MainWindow::on_checkBox_2_stateChanged(int arg1)
 {
+    if(this->ui->checkBox_2->isChecked() == true ){
     this->array->AImode[1]=1;
     this->ui->statusBar->showMessage ("White AI mode ON");
+    }
+    else{
+        this->array->AImode[1]=0;
+        this->ui->statusBar->showMessage ("White AI mode OFF");
+    }
 
 }
+
+
 
 
 void MainWindow::on_quitButton_clicked()

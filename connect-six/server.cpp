@@ -150,7 +150,7 @@ bool Server::readFromClient () //주어진 네트워크 소켓에서 읽습니�
 
 bool Server::writeToClient (const QString &output)
 {
-	if(this->socket != NULL && !this->socket->isValid() || !this->socket || !this->socket->isOpen()){//kontrola otevrenosti a validity socketu
+    if(this->socket != NULL && !this->socket->isValid() || !this->socket || !this->socket->isOpen()){
 		return false;
 	}
 
