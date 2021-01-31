@@ -33,7 +33,7 @@ AI::AI(const int &y, const int &x, QPixmap *empty, Board *parent)
 
 void AI::insertAI_W()
 {
-     W_AI_allcheck();//작동안함? 왜?
+        W_AI_allcheck();//작동안함? 왜?
         switch (this->parentPtr->gameType){//로컬,서버,클라이언트모드
             case Board::TYPE_LOCAL:
                 this->parentPtr->addItem (this->wx, this->wy);//x,y좌표 그대로 넣으면 됨
@@ -54,9 +54,8 @@ void AI::insertAI_W()
                 break;
             }
            w[wx][wy]=2;
-    //}
-
 }
+
 
 void AI::insertAI_B()
 {
@@ -87,7 +86,7 @@ void AI::insertAI_B()
 
 
 
-void AI::firstdol_B()
+void AI::insertAI_B_first()
 {
     int temp_rand_x;
     int temp_rand_y;
@@ -96,7 +95,6 @@ void AI::firstdol_B()
     temp_rand_y = rand()%3+9;
     bx = temp_rand_x;
     by = temp_rand_y;
-
     switch (this->parentPtr->gameType){//로컬,서버,클라이언트모드
         case Board::TYPE_LOCAL:
             this->parentPtr->addItem (this->bx, this->by);//x,y좌표 그대로 넣으면 됨

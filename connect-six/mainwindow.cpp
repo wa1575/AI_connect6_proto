@@ -25,8 +25,8 @@ MainWindow::MainWindow(char *argv[], int argc, QWidget *parent) : QMainWindow (p
     this->ui->gridLayout->setColumnMinimumWidth(0, 26*MAX_X);
     this->ui->label_turn->setFixedHeight(75);
     this->ui->label_turn->setFixedWidth(75);
-	this->ui->label_color->setFixedHeight(25);
-	this->ui->label_color->setFixedWidth(25);
+    this->ui->label_color->setFixedHeight(25);
+    this->ui->label_color->setFixedWidth(25);
 	this->ui->label_turn->setScaledContents(1);
 	this->ui->label_color->setScaledContents(1);
 
@@ -112,8 +112,8 @@ void MainWindow::startNetworkGame(){
 	connect (this->array->server, SIGNAL (buttonPressed (int)), this, SLOT (buttonPressHandle (int)));
 	connect (this->array->server, SIGNAL (statusChanged (int)), this, SLOT (displayStatus (int)));
 
-	this->ui->label_3->setText ("You are ");
-	this->ui->label_color->setPixmap (*circle);
+    //this->ui->label_3->setText ("You are ");
+    //this->ui->label_color->setPixmap (*blackcow);//circle
 
 }
 
@@ -123,12 +123,10 @@ void MainWindow::ConnectToGame(){
 	int port =0;
 
 	if (this->array->client){
-		//this->array->client->dropConnection();
 		delete this->array->client;
 		this->array->client = NULL;
 	}
 	if (this->array->server){
-		//this->array->server->dropConnection();
 		delete this->array->server;
 		this->array->server = NULL;
 	}
@@ -168,8 +166,8 @@ void MainWindow::ConnectToGame(){
 		connect (this->array->client, SIGNAL (buttonPressed (int)), this, SLOT (buttonPressHandle (int)));
 		connect (this->array->client, SIGNAL (statusChanged (int)), this, SLOT (displayStatus (int)));
 
-		this->ui->label_color->setPixmap (*cross);
-		this->ui->label_3->setText ("You are ");
+        //this->ui->label_color->setPixmap (*whitecow);//cross
+        //this->ui->label_3->setText ("You are ");
 	}
 }
 
@@ -216,13 +214,13 @@ void MainWindow::setStatusBar (const int &x)
 		this->ui->statusBar->showMessage ("Draw");
 		this->ui->label_score_white->setText (QString::number (array->score[0]));
 		this->ui->label_score_black->setText (QString::number (array->score[1]));
-		//QMessageBox::information(NULL, "Draw", "Draw");
+        QMessageBox::information(NULL, "Draw", "Draw");
 		break;
 	case 6:
 		this->ui->statusBar->showMessage ("Draw");
 		this->ui->label_score_white->setText (QString::number (array->score[0]));
 		this->ui->label_score_black->setText (QString::number (array->score[1]));
-		//QMessageBox::information(NULL, "Draw", "Draw");
+        QMessageBox::information(NULL, "Draw", "Draw");
 		break;
 	}
 }
@@ -259,7 +257,6 @@ void MainWindow::displayStatus (const int &event)
 	default:
 		this->ui->label_turn->clear();
 		this->ui->label_2->clear ();
-        //this->ui->label_6->setText ("Game Over");
 		this->ui->label_3->clear();
 		this->setStatusBar (event);
 	}
@@ -267,9 +264,6 @@ void MainWindow::displayStatus (const int &event)
 
 void MainWindow::buttonPressHandle (const int &x)
 {
-	//this->ui->pushButton->setEnabled ((bool)x);
-	//this->ui->pushButton_moveBack->setEnabled ((bool)x);
-
 	this->ui->actionMove_Back_2->setEnabled ((bool)x);
 	this->ui->actionReset_Game->setEnabled ((bool)x);
 }

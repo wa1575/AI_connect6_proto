@@ -17,8 +17,6 @@ enum Type{
 };
 
 
-
-
 class Item;
 class Board;
 
@@ -44,7 +42,7 @@ public:
 
     QList <QPair <int, int> > moves;
     QList <QPair <int, int> > pentad;
-    int b[20][20], w[20][20]; //가중치
+    int b[24][24], w[24][24]; //가중치
 
 
     void W_AI_allcheck();
@@ -105,7 +103,7 @@ public:
 
     void insertAI_W();
     void insertAI_B();
-    void firstdol_B();
+    void insertAI_B_first();
     void insertAI_W_first1();
     void insertAI_W_first2();
 

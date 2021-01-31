@@ -28,7 +28,7 @@ void Item::mousePressEvent (QMouseEvent *)
                     this->childPtr->insertAI_W_first1();
                     break;
                 }else if(parentPtr->activeType==TYPE_CIRCLE && parentPtr->AImode[0]==1 && parentPtr->bturn==0&& parentPtr->turn==0){
-                    this->childPtr->firstdol_B();
+                    this->childPtr->insertAI_B_first();
                     break;
                 }
                 else if(parentPtr->activeType==TYPE_CROSS && parentPtr->AImode[1]==1 && parentPtr->wturn==2&& parentPtr->turn==2){
@@ -54,7 +54,7 @@ void Item::mousePressEvent (QMouseEvent *)
                         this->childPtr->insertAI_W_first1();
                         break;
                     }else if(parentPtr->activeType==TYPE_CIRCLE && parentPtr->AImode[0]==1 && parentPtr->bturn==0&& parentPtr->turn==0){
-                        this->childPtr->firstdol_B();
+                        this->childPtr->insertAI_B_first();
                         break;
                     }else if(parentPtr->activeType==TYPE_CROSS && parentPtr->AImode[1]==1 && parentPtr->wturn==2&& parentPtr->turn==2){
                         this->childPtr->insertAI_W_first2();
@@ -79,7 +79,7 @@ void Item::mousePressEvent (QMouseEvent *)
                         this->childPtr->insertAI_W_first1();
                         break;
                     }else if(parentPtr->activeType==TYPE_CIRCLE && parentPtr->AImode[0]==1 && parentPtr->bturn==0&& parentPtr->turn==0){
-                        this->childPtr->firstdol_B();
+                        this->childPtr->insertAI_B_first();
                         break;
                     }else if(parentPtr->activeType==TYPE_CROSS && parentPtr->AImode[1]==1 && parentPtr->wturn==2&& parentPtr->turn==2){
                         this->childPtr->insertAI_W_first2();
