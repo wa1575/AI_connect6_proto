@@ -4,7 +4,6 @@
 AI::AI(const int &y, const int &x, QPixmap *empty, Board *parent)
 {
 
-    //int i, j;
     this->x=y;
     this->y=x;
     this->empty=empty;
@@ -13,7 +12,6 @@ AI::AI(const int &y, const int &x, QPixmap *empty, Board *parent)
     this->gameType=TYPE_LOCAL;
     this->game=1;
     this->setPixmap(*empty);
-    //b[][]w[][] 다른 함수에서 수정하도록 변경
 
     for(i=0; i<19; i++)    //모든 바둑판위의 값 0으로 초기화
         {
@@ -43,19 +41,15 @@ void AI::insertAI_W()
 
             case Board::TYPE_SERVER:
                 if ((int)parentPtr->activeType==(int)Board::TYPE_SERVER){
-                    this->x = wy; //y or x
-                    this->y = wx;
-                    this->parentPtr->server->writeToClient("200 "+QString::number(this->x)+" "+QString::number(this->y)+"\n");
-                    this->parentPtr->addItem (wy, wx);
+                    this->parentPtr->server->writeToClient("200 "+QString::number(this->wx)+" "+QString::number(this->wy)+"\n");
+                    this->parentPtr->addItem (wx, wy);
                 }
                 break;
 
             case Board::TYPE_CLIENT:
                 if ((int)this->parentPtr->activeType==(int)Board::TYPE_CLIENT){
-                    this->x = wy; //y or x
-                    this->y = wx;
-                    this->parentPtr->client->writeToServer ("200 "+QString::number(this->x)+" "+QString::number(this->y)+"\n");
-                    this->parentPtr->addItem (this->x, this->y);
+                    this->parentPtr->client->writeToServer ("200 "+QString::number(this->wx)+" "+QString::number(this->wy)+"\n");
+                    this->parentPtr->addItem (wx, wy);
                 }
                 break;
             }
@@ -74,19 +68,15 @@ void AI::insertAI_B()
 
         case Board::TYPE_SERVER:
             if ((int)parentPtr->activeType==(int)Board::TYPE_SERVER){
-                this->x = bx; //y or x
-                this->y = by;
-                this->parentPtr->server->writeToClient("200 "+QString::number(this->x)+" "+QString::number(this->y)+"\n");
+                this->parentPtr->server->writeToClient("200 "+QString::number(this->bx)+" "+QString::number(this->by)+"\n");
                 this->parentPtr->addItem (bx, by);
             }
             break;
 
         case Board::TYPE_CLIENT:
             if ((int)this->parentPtr->activeType==(int)Board::TYPE_CLIENT){
-                this->x = bx; //y or x
-                this->y = by;
-                this->parentPtr->client->writeToServer ("200 "+QString::number(this->x)+" "+QString::number(this->y)+"\n");
-                this->parentPtr->addItem (this->x, this->y);
+                this->parentPtr->client->writeToServer ("200 "+QString::number(this->bx)+" "+QString::number(this->by)+"\n");
+                this->parentPtr->addItem (this->bx, this->by);
             }
             break;
         }
@@ -107,7 +97,25 @@ void AI::firstdol_B()
     bx = temp_rand_x;
     by = temp_rand_y;
 
-    this->parentPtr->addItem (this->bx, this->by);
+    switch (this->parentPtr->gameType){//로컬,서버,클라이언트모드
+        case Board::TYPE_LOCAL:
+            this->parentPtr->addItem (this->bx, this->by);//x,y좌표 그대로 넣으면 됨
+            break;
+
+        case Board::TYPE_SERVER:
+            if ((int)parentPtr->activeType==(int)Board::TYPE_SERVER){
+                this->parentPtr->server->writeToClient("200 "+QString::number(this->bx)+" "+QString::number(this->by)+"\n");
+                this->parentPtr->addItem (bx, by);
+            }
+            break;
+
+        case Board::TYPE_CLIENT:
+            if ((int)this->parentPtr->activeType==(int)Board::TYPE_CLIENT){
+                this->parentPtr->client->writeToServer ("200 "+QString::number(this->bx)+" "+QString::number(this->by)+"\n");
+                this->parentPtr->addItem (this->bx, this->by);
+            }
+            break;
+        }
 }
 
 
@@ -125,13 +133,32 @@ void AI::insertAI_W_first1()//잘 됨
         }
     }
 
-    this->parentPtr->addItem (this->wx, this->wy);
-    }
+    switch (this->parentPtr->gameType){//로컬,서버,클라이언트모드
+        case Board::TYPE_LOCAL:
+            this->parentPtr->addItem (this->wx, this->wy);//x,y좌표 그대로 넣으면 됨
+            break;
+
+        case Board::TYPE_SERVER:
+            if ((int)parentPtr->activeType==(int)Board::TYPE_SERVER){
+                this->parentPtr->server->writeToClient("200 "+QString::number(this->wx)+" "+QString::number(this->wy)+"\n");
+                this->parentPtr->addItem (wx, wy);
+            }
+            break;
+
+        case Board::TYPE_CLIENT:
+            if ((int)this->parentPtr->activeType==(int)Board::TYPE_CLIENT){
+                this->parentPtr->client->writeToServer ("200 "+QString::number(this->wx)+" "+QString::number(this->wy)+"\n");
+                this->parentPtr->addItem (wx, wy);
+            }
+            break;
+        }
+
+   // this->parentPtr->addItem (this->wx, this->wy);
+}
 
 
 void AI::insertAI_W_first2()
 {
-    //if(this->parentPtr->wturn == 2 && parentPtr->activeType==TYPE_CROSS){
         for(int x=0; x<19; x++)
         {
             for(int y=0; y<19; y++)
@@ -143,9 +170,25 @@ void AI::insertAI_W_first2()
                 }
             }
         }
-   // }
-    this->parentPtr->addItem (this->wx, this->wy);
+        switch (this->parentPtr->gameType){//로컬,서버,클라이언트모드
+            case Board::TYPE_LOCAL:
+                this->parentPtr->addItem (this->wx, this->wy);//x,y좌표 그대로 넣으면 됨
+                break;
 
+            case Board::TYPE_SERVER:
+                if ((int)parentPtr->activeType==(int)Board::TYPE_SERVER){
+                    this->parentPtr->server->writeToClient("200 "+QString::number(this->wx)+" "+QString::number(this->wy)+"\n");
+                    this->parentPtr->addItem (wx, wy);
+                }
+                break;
+
+            case Board::TYPE_CLIENT:
+                if ((int)this->parentPtr->activeType==(int)Board::TYPE_CLIENT){
+                    this->parentPtr->client->writeToServer ("200 "+QString::number(this->wx)+" "+QString::number(this->wy)+"\n");
+                    this->parentPtr->addItem (wx, wy);
+                }
+                break;
+            }
 
 }
 
@@ -366,18 +409,18 @@ void AI::W_AI_5_6_7_check()
             //222222가로로 이길수있을때...킬각재기 잘 안됨
             if( newwhite[x][y] == 2 && newwhite[x][y+1] == 2 && newwhite[x][y+2] == 2 && newwhite[x][y+3] == 2 && newwhite[x][y+4] == 2 &&
                 newwhite[x][y+5] == 2 )
-                act[m][n] += 99999999;
+                act[m][n] += 99999999999;
             //세로로 이길수있을때
             if( newwhite[x][y] == 2 && newwhite[x+1][y] == 2 && newwhite[x+2][y] == 2 && newwhite[x+3][y] == 2 && newwhite[x+4][y] == 2 &&
                 newwhite[x+5][y] == 2 )
-                act[m][n] += 99999999;
+                act[m][n] += 99999999999;
             //대각선으로 이길수있을때
             if( newwhite[x][y] == 2 && newwhite[x+1][y+1] == 2 && newwhite[x+2][y+2] == 2 && newwhite[x+3][y+3] == 2 && newwhite[x+4][y+4] == 2 &&
                 newwhite[x+5][y+5] == 2 )
-                act[m][n] += 99999999;
+                act[m][n] += 99999999999;
             if( newwhite[x][y] == 2 && newwhite[x+1][y-1] == 2 && newwhite[x+2][y-2] == 2 && newwhite[x+3][y-3] == 2 && newwhite[x+4][y-4] == 2 &&
                 newwhite[x+5][y-5] == 2 )
-                act[m][n] += 99999999;
+                act[m][n] += 99999999999;
               }
           }
           newwhite[m][n] = 0;
@@ -3600,18 +3643,18 @@ void AI::B_AI_5_6_7_check()
                 //222222가로로 이길수있을때
                 if( newblack[x][y] == 1 && newblack[x][y+1] == 1 && newblack[x][y+2] == 1 && newblack[x][y+3] == 1 && newblack[x][y+4] == 1 &&
                     newblack[x][y+5] == 1 )
-                    act2[m][n] += 99999999;
+                    act2[m][n] += 99999999999;
                 //세로로 이길수있을때
                 if( newblack[x][y] == 1 && newblack[x+1][y] == 1 && newblack[x+2][y] == 1 && newblack[x+3][y] == 1 && newblack[x+4][y] == 1 &&
                     newblack[x+5][y] == 1 )
-                    act2[m][n] += 99999999;
+                    act2[m][n] += 99999999999;
                 //대각선으로 이길수있을때
                 if( newblack[x][y] == 1 && newblack[x+1][y+1] == 1 && newblack[x+2][y+2] == 1 && newblack[x+3][y+3] == 1 && newblack[x+4][y+4] == 1 &&
                     newblack[x+5][y+5] == 1 )
-                    act2[m][n] += 99999999;
+                    act2[m][n] += 99999999999;
                 if( newblack[x][y] == 1 && newblack[x+1][y-1] == 1 && newblack[x+2][y-2] == 1 && newblack[x+3][y-3] == 1 && newblack[x+4][y-4] == 1 &&
                     newblack[x+5][y-5] == 1 )
-                    act2[m][n] += 99999999;
+                    act2[m][n] += 99999999999;
                   }
               }
               newblack[m][n] = 0;
