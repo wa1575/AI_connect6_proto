@@ -22,6 +22,8 @@
 #include <QInputDialog>
 #include <QMainWindow>
 #include <QLabel>
+#include <ctime>
+
 
 
 const int thezero = 0 , theone = 1 , thetwo = 2;

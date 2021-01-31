@@ -49,36 +49,13 @@ public:
     int bxaxis[360], byaxis[360], wxaxis[360], wyaxis[360];
     bool bwin(int one);
     bool wwin(int two);
-    int b[24][24], w[24][24]; //가중치
+    int b[20][20], w[20][20]; //가중치
 
     int wcnt2,wcnt3,wcnt4,wcnt5;
     int bcnt2,bcnt3, bcnt4, bcnt5;
     int tempbx, tempby, tempwx, tempwy;
-    int black[24][24], white[24][24];
 
-signals:
 
-    /*!
-     *  \fn Board::statusChanged (int)
-     *  \brief 각 이동 / 승리 / 무승부 후 상태 변경을 나타냅니다.
-     *  \param[in] 이벤트 신호 상태
-     *
-     *  \fn Board::NewGamePressed (int)
-     *  \brief  간단한 새 게임 버튼(New game)을 누를 때 호출됩니다.
-     *  \param[in] x 창에서 버튼을 비활성화 / 활성화합니다.
-     *
-     */
-    void statusChanged (const int&);
-    void NewGamePressed (const int&);
-
-public slots:
-
-    void bsituation();
-    void wsituation();
-
-    void prn();
-
-    // AI 부분 //
     void W_AI_allcheck();
 
     void W_AI_5_6_7_check();
@@ -103,13 +80,7 @@ public slots:
     void defense_sero_check_W();
     void defense_slash_check_W();
     void defense_in_slash_check_W();
-  /*
-    void insertblack(MySocket *player,int gameMode);
-    void insertwhite(MySocket *player,int gameMode);
-    void firstdol_B(MySocket *player,int gameMode);
 
-    bool draw(int zero);
-    int winner();
 
 
 
@@ -139,6 +110,49 @@ public slots:
     void defense_sero_check_B();
     void defense_slash_check_B();
     void defense_in_slash_check_B();
+
+
+
+
+   //수정필요
+    void insertAI_W();
+    void insertAI_B();
+    void firstdol_B();
+    void insertAI_W_first1();
+    void insertAI_W_first2();
+
+    void change_w(int x, int y);
+    void change_b(int x, int y);
+
+
+signals:
+
+    /*!
+     *  \fn Board::statusChanged (int)
+     *  \brief 각 이동 / 승리 / 무승부 후 상태 변경을 나타냅니다.
+     *  \param[in] 이벤트 신호 상태
+     *
+     *  \fn Board::NewGamePressed (int)
+     *  \brief  간단한 새 게임 버튼(New game)을 누를 때 호출됩니다.
+     *  \param[in] x 창에서 버튼을 비활성화 / 활성화합니다.
+     *
+     */
+    void statusChanged (const int&);
+    void NewGamePressed (const int&);
+
+public slots:
+
+    //void bsituation();
+    //void wsituation();
+    //void prn();
+
+  /*
+    void insertblack(MySocket *player,int gameMode);
+    void insertwhite(MySocket *player,int gameMode);
+    void firstdol_B(MySocket *player,int gameMode);
+
+    bool draw(int zero);
+    int winner();
 
     */
 
@@ -170,11 +184,7 @@ private:
         //int turn;//1:client1 turn ,2:client2 turn
     }GAME_DATA;
 
-   //수정필요
-    void insertAI_W(GAME_DATA gameMode);
-    void insertAI_B(GAME_DATA gameMode);
-   // void insertAI_W_first1(GAME_DATA gameMode);
-   // void insertAI_W_first2(GAME_DATA gameMode);
+    // AI 부분 //
 
 
 

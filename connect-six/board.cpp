@@ -1,5 +1,5 @@
 #include "board.h"
-int turn = 0 ;
+
 
 
 
@@ -22,7 +22,7 @@ Board::Board (char *argv[], int argc, QPixmap *empty, QPixmap *circle, QPixmap *
         layout->setRowMinimumHeight (i, 26);
 		this->items[i]=new Item*[MAX_X];
 		for (j=0;j<MAX_X;j++){
-			this->items[i][j]=new Item (i, j, empty, this);
+            this->items[i][j]=new Item (i, j, empty, this, this->ai);
             layout->setColumnMinimumWidth(j, 26);
 			layout->addWidget (this->items[i][j], i, j);
 		}
@@ -55,13 +55,13 @@ Board::Board (char *argv[], int argc, QPixmap *empty, QPixmap *circle, QPixmap *
 void Board::unHighlight (void)//변경 필요 이전턴꺼 하이라이트 지움
 {
 	if (this->moves.size()>0){
-        if (turn ==1 && this->activeType==Item::TYPE_CIRCLE){ //TYPE_CIRCLE:흑돌
+        if (bturn ==1 && this->activeType==Item::TYPE_CIRCLE){ //TYPE_CIRCLE:흑돌
             this->items[moves[moves.size()-1].second][moves[moves.size()-1].first]->setPixmap(*cross);//cross
-        }else if (turn ==1 && this->activeType==Item::TYPE_CROSS){//TYPE_CROSS:백돌
+        }else if (wturn ==1 && this->activeType==Item::TYPE_CROSS){//TYPE_CROSS:백돌
             this->items[moves[moves.size()-1].second][moves[moves.size()-1].first]->setPixmap(*circle);//circle
-        }else if (turn ==2 && this->activeType==Item::TYPE_CIRCLE){ //TYPE_CIRCLE:흑돌
+        }else if (bturn ==2 && this->activeType==Item::TYPE_CIRCLE){ //TYPE_CIRCLE:흑돌
             this->items[moves[moves.size()-1].second][moves[moves.size()-1].first]->setPixmap(*circle);//cross
-        }else if (turn ==2 && this->activeType==Item::TYPE_CROSS){//TYPE_CROSS:백돌
+        }else if (wturn ==2 && this->activeType==Item::TYPE_CROSS){//TYPE_CROSS:백돌
             this->items[moves[moves.size()-1].second][moves[moves.size()-1].first]->setPixmap(*cross);//circle
 	}
 }
@@ -90,40 +90,47 @@ void Board::addItem (const int &x, const int &y)
         this->unHighlight ();
         this->moves.append(QPair <int, int>(x, y));
 
-        //this->w->on_textEdit_textChanged();
-
-        if (turn == 0 && t==Item::TYPE_CIRCLE){//TYPE_CIRCLE:흑돌
+        if (bturn == 0 && t==Item::TYPE_CIRCLE && wturn ==0){//TYPE_CIRCLE:흑돌 첫수
 			this->items[y][x]->setPixmap(circleHighlighted);
-            this->ai->b[x][y] = 2;
+            this->ai->change_b(x,y);
             this->activeType=Item::TYPE_CROSS;
-            turn += 1;
-        }else if (turn == 0 && t==Item::TYPE_CROSS) {//TYPE_CROSS 백돌
+            this->wturn += 1;
+
+        }else if (wturn == 0 && t==Item::TYPE_CROSS && bturn ==0) {//TYPE_CROSS 백돌 첫수
 			this->items[y][x]->setPixmap(crossHighlighted);
-            this->ai->w[x][y] = 2;
+            this->ai->change_w(x,y);
             this->activeType=Item::TYPE_CIRCLE; //TYPE_CIRCLE
-            turn += 1;
-        }else if (turn == 1 && t==Item::TYPE_CIRCLE){//TYPE_CIRCLE:흑돌
-            this->items[y][x]->setPixmap(circleHighlighted);
-            this->ai->b[x][y] = 2;
-            this->activeType=Item::TYPE_CIRCLE;
-            turn += 1;
-        } else if (turn == 1 && t==Item::TYPE_CROSS) {
-            this->items[y][x]->setPixmap(crossHighlighted);
-            this->ai->w[x][y] = 2;
-            this->activeType=Item::TYPE_CROSS; //TYPE_CIRCLE
-            turn +=1 ;
-        }else if (turn ==2 && t==Item::TYPE_CIRCLE){
-            this->items[y][x]->setPixmap(circleHighlighted);
-            this->ai->b[x][y] = 2;
-            this->activeType=Item::TYPE_CROSS;
-            turn -= 1;
-        }else{
-            this->items[y][x]->setPixmap(crossHighlighted);
-            this->ai->w[x][y] = 2;
-            this->activeType=Item::TYPE_CIRCLE;
-            turn -= 1;
+            this->bturn += 1;
         }
 
+        else if (bturn == 1 && t==Item::TYPE_CIRCLE && wturn ==0){//TYPE_CIRCLE:두번째수 흑돌차례
+            this->items[y][x]->setPixmap(circleHighlighted);
+            this->ai->change_b(x,y);
+            this->activeType=Item::TYPE_CIRCLE;
+            this->bturn += 1;
+
+        } else if (wturn == 1 && t==Item::TYPE_CROSS && bturn ==0) {//TYPE_CROSS:두번째수 백돌차례
+            this->items[y][x]->setPixmap(crossHighlighted);
+            this->ai->change_w(x,y);
+            this->activeType=Item::TYPE_CROSS; //TYPE_CIRCLE
+            this->wturn += 1;
+
+
+        }else if (bturn == 2 && t==Item::TYPE_CIRCLE && wturn == 0){//TYPE_CIRCLE:두번째수 흑돌_2
+            this->items[y][x]->setPixmap(circleHighlighted);
+            this->ai->change_b(x,y);
+            this->activeType=Item::TYPE_CROSS;
+            this->bturn -= 2;
+            this->wturn += 1;
+
+        }else{
+            this->items[y][x]->setPixmap(crossHighlighted); //TYPE_CROSS:두번째수 백돌_2
+            this->ai->change_w(x,y);
+            this->activeType=Item::TYPE_CIRCLE;
+            this->wturn -= 2;
+            this->bturn += 1;
+        }
+        this->turn++;
         emit this->statusChanged (activeType); //턴넘기기
 
 
@@ -291,6 +298,8 @@ void Board::reset (void)
     this->win=Item::TYPE_EMPTY; //TYPE_EMPTY
 	this->moves.clear ();
 	this->pentad.clear ();
+    bturn = 0;
+    wturn = 0;
     turn = 0;
 	emit this->statusChanged(7);
 }
@@ -298,7 +307,9 @@ void Board::reset (void)
 void Board::setGame (const int &x)
 {
 	this->game=x;
-    turn =0;
+    bturn = 0;
+    wturn = 0;
+    turn = 0;
 }
 
 bool Board::testwin (const int &x, const int &y)//승리조건
@@ -379,6 +390,8 @@ bool Board::testwin (const int &x, const int &y)//승리조건
 Board::~Board ()
 {
 	int i;
+    bturn = 0;
+    wturn = 0;
     turn = 0;
 	for (i=0;i<MAX_Y;i++){
 		delete [] this->items[i];

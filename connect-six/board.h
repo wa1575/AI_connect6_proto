@@ -96,6 +96,9 @@ public:
     //QList <QPair <int, int> > moved;
     int wmoved[20][20] = {};
     int bmoved[20][20] = {};
+    int bturn = 0 ;
+    int wturn = 0 ;
+    int turn = 0 ;
 
     //MainWindow * w;
     GAME_DATA gamedata;

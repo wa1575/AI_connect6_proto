@@ -1,7 +1,7 @@
 #include "item.h"
 #include "board.h"
 
-Item::Item(const int &y, const int &x, QPixmap *empty, Board *parent)
+Item::Item(const int &y, const int &x, QPixmap *empty, Board *parent, AI *child)
 {
 
     setPalette(QPalette (QColor ("#ffc74f")));//d0a343
@@ -12,6 +12,7 @@ Item::Item(const int &y, const int &x, QPixmap *empty, Board *parent)
 	this->empty=empty;
 	this->type=TYPE_EMPTY;
 	this->parentPtr=parent;
+    this->childPtr=child;
 	this->setPixmap(*empty);
 	//this->setScaledContents(1);
 	this->setMinimumSize ((*empty).width(), (*empty).height());
@@ -23,8 +24,32 @@ void Item::mousePressEvent (QMouseEvent *)
 	if ((this->type==TYPE_EMPTY) && parentPtr->game){
 		switch (parentPtr->gameType){
 			case Board::TYPE_LOCAL:
-                this->parentPtr->addItem (this->x, this->y);              
+            //흑우 첫수 vs 백우 ai
+                if(parentPtr->activeType==TYPE_CROSS && parentPtr->AImode[1]==1 && parentPtr->wturn==1&& parentPtr->turn==1){
+                    this->childPtr->insertAI_W_first1();
+                    break;
+                }else if(parentPtr->activeType==TYPE_CIRCLE && parentPtr->AImode[0]==1 && parentPtr->bturn==0&& parentPtr->turn==0){
+                    this->childPtr->firstdol_B();
+                    break;
+                }
+                else if(parentPtr->activeType==TYPE_CROSS && parentPtr->AImode[1]==1 && parentPtr->wturn==2&& parentPtr->turn==2){
+                    this->childPtr->insertAI_W_first2();
+                    break;
+                }
+                else if(parentPtr->activeType==TYPE_CROSS && parentPtr->AImode[1]==1&&parentPtr->turn >=3){
+                    //this->childPtr->W_AI_allcheck();
+                    this->childPtr->insertAI_W();
+                    break;
+                } else if(parentPtr->activeType==TYPE_CIRCLE && parentPtr->AImode[0]==1&&parentPtr->turn >=3){
+                    //this->childPtr->B_AI_allcheck();
+                    this->childPtr->insertAI_B();
+                    break;
+                }
+
+                else{
+                this->parentPtr->addItem (this->x, this->y);
                 break;
+                }
 
 
 			case Board::TYPE_SERVER:
