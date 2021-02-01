@@ -15,33 +15,10 @@ class Client : public QObject
 Q_OBJECT
 public:
 
-    /*!
-     *
-     *	\fn Client::Client (int MAX_X, int MAX_Y, const QHostAddress hostname, int port, QObject *parent=NULL)
-     *  \brief 클라이언트
-     *  \param[in] MAX_X 은 X에 대한 보드판 치수
-     *  \param[in] MAX_Y 은 Y에 대한 보드판 치수
-     *  \param[in] hostname 은 클라이언트가 연결되는 서버의 IP 주소입니다.
-     *  \param[in] port 는 클라이언트가 연결하는 포트입니다.
-     *  \param[in] parent Qt가 부모 클래스를 소멸 시킬 때 객체의 할당 해제를 처리하도록합니다.
-     *
-     *  필요한 변수 설정
-     *
-     *
-     *  \fn Client::writeToServer (QString)
-     *  \brief 소켓에 한 줄을 씁니다.
-     *  \param[in] output 기록할 출력 라인
-     *  \return bool
-     *
-     *  \fn Client::start ()
-     *  \brief 서버에 대한 연결 시도
-     *
-     *
-     */
-
-	explicit Client (const int &MAX_X, const int &MAX_Y, const QHostAddress &hostname, const int &port, QObject *parent=NULL);
-	bool start (void);
-	bool writeToServer (QString);
+    //보드판 치수, 클라이언트가 연결되는 ip주소, 포트번호, qt가 부모클래스 소멸시킬 때 객체 할당 해제 처리
+    explicit Client (const int &MAX_X, const int &MAX_Y, const QHostAddress &hostname, const int &port, QObject *parent=NULL);
+    bool start (void); //서버에 연결 시도
+    bool writeToServer (QString);//소켓에 한줄 쓰기
 
 signals:
 

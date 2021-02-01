@@ -1,11 +1,6 @@
 #ifndef BOARD_H
 #define BOARD_H
 
-/*! \class Board
- *  \brief Board
- *
- *  플레이 영역
- */
 
 #include <QWidget>
 #include <QGridLayout>

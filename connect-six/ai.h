@@ -42,64 +42,7 @@ public:
 
     QList <QPair <int, int> > moves;
     QList <QPair <int, int> > pentad;
-    int b[24][24], w[24][24]; //가중치
-
-
-    void W_AI_allcheck();
-
-    void W_AI_5_6_7_check();
-
-    void W_AI_2_garo_check();
-    void W_AI_3_garo_check();
-    void W_AI_4_garo_check();
-
-    void W_AI_2_sero_check();
-    void W_AI_3_sero_check();
-    void W_AI_4_sero_check();
-
-    void W_AI_2_slash_check();
-    void W_AI_3_slash_check();
-    void W_AI_4_slash_check();
-
-    void W_AI_2_in_slash_check();
-    void W_AI_3_in_slash_check();
-    void W_AI_4_in_slash_check();
-
-    void defense_garo_check_W();
-    void defense_sero_check_W();
-    void defense_slash_check_W();
-    void defense_in_slash_check_W();
-
-
-
-
-    void B_AI_allcheck();
-
-    void B_AI_5_6_7_check();
-
-    void B_AI_2_garo_check();
-    void B_AI_3_garo_check();
-    void B_AI_4_garo_check();
-
-    void B_AI_2_sero_check();
-    void B_AI_3_sero_check();
-    void B_AI_4_sero_check();
-
-    void B_AI_2_slash_check();
-    void B_AI_3_slash_check();
-    void B_AI_4_slash_check();
-
-    void B_AI_2_in_slash_check();
-    void B_AI_3_in_slash_check();
-    void B_AI_4_in_slash_check();
-
-
-
-    void defense_garo_check_B();
-    void defense_sero_check_B();
-    void defense_slash_check_B();
-    void defense_in_slash_check_B();
-
+    int b[19][19], w[19][19]; //돌의 위치
 
     void insertAI_W();
     void insertAI_B();
@@ -112,29 +55,15 @@ public:
 
 
 signals:
-
-    /*!
-     *  \fn Board::statusChanged (int)
-     *  \brief 각 이동 / 승리 / 무승부 후 상태 변경을 나타냅니다.
-     *  \param[in] 이벤트 신호 상태
-     *
-     *  \fn Board::NewGamePressed (int)
-     *  \brief  간단한 새 게임 버튼(New game)을 누를 때 호출됩니다.
-     *  \param[in] x 창에서 버튼을 비활성화 / 활성화합니다.
-     *
-     */
-    void statusChanged (const int&);
-    void NewGamePressed (const int&);
+    void statusChanged (const int&);//이동/승리/무승부
+    void NewGamePressed (const int&);//새 게임 버튼 누를 때 호출
 
 public slots:
 
 
 
 private:
-
-    bool testwin (const int&, const int&);
     void addItem (const int&, const int&);
-    void unHighlight (void);
     void clear (void);
 
     Item *** items;
@@ -145,7 +74,6 @@ private:
     Board* parentPtr;
     Type type;
 
-
     // AI 변수
     int i, j, z, bx, by, wx, wy, n;
     int actpnt; // AI 활동 가중치 변수
@@ -155,6 +83,59 @@ private:
     int newwhite[19][19];	//바둑돌이 놓여지는 b, w배열에서 가중치를 판단하기 위한 추가배열
     int newblack[19][19];
     int turn;	//첫 번째 턴인지 두 번째 턴인지 구분해주는 함수이다.
+
+    void W_AI_allcheck();
+
+    void W_AI_5_6_7_check();
+
+    void W_AI_2_Horizontal_check();
+    void W_AI_3_Horizontal_check();
+    void W_AI_4_Horizontal_check();
+
+    void W_AI_2_Vertical_check();
+    void W_AI_3_Vertical_check();
+    void W_AI_4_Vertical_check();
+
+    void W_AI_2_Diagonal_check();
+    void W_AI_3_Diagonal_check();
+    void W_AI_4_Diagonal_check();
+
+    void W_AI_2_in_Diagonal_check();
+    void W_AI_3_in_Diagonal_check();
+    void W_AI_4_in_Diagonal_check();
+
+    void defense_Horizontal_check_W();
+    void defense_Vertical_check_W();
+    void defense_Diagonal_check_W();
+    void defense_in_Diagonal_check_W();
+
+
+
+
+    void B_AI_allcheck();
+
+    void B_AI_5_6_7_check();
+
+    void B_AI_2_Horizontal_check();
+    void B_AI_3_Horizontal_check();
+    void B_AI_4_Horizontal_check();
+
+    void B_AI_2_Vertical_check();
+    void B_AI_3_Vertical_check();
+    void B_AI_4_Vertical_check();
+
+    void B_AI_2_Diagonal_check();
+    void B_AI_3_Diagonal_check();
+    void B_AI_4_Diagonal_check();
+
+    void B_AI_2_in_Diagonal_check();
+    void B_AI_3_in_Diagonal_check();
+    void B_AI_4_in_Diagonal_check();
+
+    void defense_Horizontal_check_B();
+    void defense_Vertical_check_B();
+    void defense_Diagonal_check_B();
+    void defense_in_Diagonal_check_B();
 
 };
 

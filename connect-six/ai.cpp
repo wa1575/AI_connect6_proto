@@ -223,26 +223,26 @@ void AI::W_AI_allcheck()//킬각을 못봄
 
         W_AI_5_6_7_check();
 
-        defense_garo_check_W();
-        defense_sero_check_W();
-        defense_slash_check_W();
-        defense_in_slash_check_W();
+        defense_Horizontal_check_W();
+        defense_Vertical_check_W();
+        defense_Diagonal_check_W();
+        defense_in_Diagonal_check_W();
 
-        W_AI_2_garo_check();
-        W_AI_3_garo_check();
-        W_AI_4_garo_check();
+        W_AI_2_Horizontal_check();
+        W_AI_3_Horizontal_check();
+        W_AI_4_Horizontal_check();
 
-        W_AI_2_sero_check();
-        W_AI_3_sero_check();
-        W_AI_4_sero_check();
+        W_AI_2_Vertical_check();
+        W_AI_3_Vertical_check();
+        W_AI_4_Vertical_check();
 
-        W_AI_2_slash_check();
-        W_AI_3_slash_check();
-        W_AI_4_slash_check();
+        W_AI_2_Diagonal_check();
+        W_AI_3_Diagonal_check();
+        W_AI_4_Diagonal_check();
 
-        W_AI_2_in_slash_check();
-        W_AI_3_in_slash_check();
-        W_AI_4_in_slash_check();
+        W_AI_2_in_Diagonal_check();
+        W_AI_3_in_Diagonal_check();
+        W_AI_4_in_Diagonal_check();
 
         for(int x=0; x<19; x++)
         {
@@ -427,7 +427,7 @@ void AI::W_AI_5_6_7_check()
 
 }
 
-void AI::W_AI_2_garo_check()
+void AI::W_AI_2_Horizontal_check()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -562,7 +562,7 @@ void AI::W_AI_2_garo_check()
     }
 }
 
-void AI::W_AI_3_garo_check()
+void AI::W_AI_3_Horizontal_check()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -764,7 +764,7 @@ void AI::W_AI_3_garo_check()
     }
 }
 
-void AI::W_AI_4_garo_check()
+void AI::W_AI_4_Horizontal_check()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -984,7 +984,7 @@ void AI::W_AI_4_garo_check()
 
 
 
-void AI::W_AI_2_sero_check()
+void AI::W_AI_2_Vertical_check()
 {
     for(int m=0 ; m<19 ; m++)
         {
@@ -1119,7 +1119,7 @@ void AI::W_AI_2_sero_check()
         }
 }
 
-void AI::W_AI_3_sero_check()
+void AI::W_AI_3_Vertical_check()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -1322,7 +1322,7 @@ void AI::W_AI_3_sero_check()
 
 }
 
-void AI::W_AI_4_sero_check()
+void AI::W_AI_4_Vertical_check()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -1540,7 +1540,7 @@ void AI::W_AI_4_sero_check()
 
 }
 
-void AI::W_AI_2_slash_check()
+void AI::W_AI_2_Diagonal_check()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -1675,7 +1675,7 @@ void AI::W_AI_2_slash_check()
     }
 }
 
-void AI::W_AI_3_slash_check()
+void AI::W_AI_3_Diagonal_check()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -1877,7 +1877,7 @@ void AI::W_AI_3_slash_check()
     }
 }
 
-void AI::W_AI_4_slash_check()
+void AI::W_AI_4_Diagonal_check()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -2096,7 +2096,7 @@ void AI::W_AI_4_slash_check()
 
 
 
-void AI::W_AI_2_in_slash_check()
+void AI::W_AI_2_in_Diagonal_check()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -2231,7 +2231,7 @@ void AI::W_AI_2_in_slash_check()
     }
 }
 
-void AI::W_AI_3_in_slash_check()
+void AI::W_AI_3_in_Diagonal_check()
 {
     for(int m=0 ; m<19 ; m++)
         {
@@ -2434,7 +2434,7 @@ void AI::W_AI_3_in_slash_check()
 
 }
 
-void AI::W_AI_4_in_slash_check()
+void AI::W_AI_4_in_Diagonal_check()
 {
     for (int m = 0; m < 19; m++)
         {
@@ -2650,7 +2650,7 @@ void AI::W_AI_4_in_slash_check()
         }
 }
 
-void AI::defense_garo_check_W()
+void AI::defense_Horizontal_check_W()
 {
     for(int m=0 ; m<19 ; m++)
         {
@@ -2848,7 +2848,7 @@ void AI::defense_garo_check_W()
         }
 }
 
-void AI::defense_sero_check_W()
+void AI::defense_Vertical_check_W()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -3043,7 +3043,7 @@ void AI::defense_sero_check_W()
     }
 }
 
-void AI::defense_slash_check_W()
+void AI::defense_Diagonal_check_W()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -3242,7 +3242,7 @@ void AI::defense_slash_check_W()
 
 }
 
-void AI::defense_in_slash_check_W()
+void AI::defense_in_Diagonal_check_W()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -3458,26 +3458,26 @@ void AI::B_AI_allcheck()
 
         B_AI_5_6_7_check();
 
-        defense_garo_check_B();
-        defense_sero_check_B();
-        defense_slash_check_B();
-        defense_in_slash_check_B();
+        defense_Horizontal_check_B();
+        defense_Vertical_check_B();
+        defense_Diagonal_check_B();
+        defense_in_Diagonal_check_B();
 
-        B_AI_2_garo_check();
-        B_AI_3_garo_check();
-        B_AI_4_garo_check();
+        B_AI_2_Horizontal_check();
+        B_AI_3_Horizontal_check();
+        B_AI_4_Horizontal_check();
 
-        B_AI_2_sero_check();
-        B_AI_3_sero_check();
-        B_AI_4_sero_check();
+        B_AI_2_Vertical_check();
+        B_AI_3_Vertical_check();
+        B_AI_4_Vertical_check();
 
-        B_AI_2_slash_check();
-        B_AI_3_slash_check();
-        B_AI_4_slash_check();
+        B_AI_2_Diagonal_check();
+        B_AI_3_Diagonal_check();
+        B_AI_4_Diagonal_check();
 
-        B_AI_2_in_slash_check();
-        B_AI_3_in_slash_check();
-        B_AI_4_in_slash_check();
+        B_AI_2_in_Diagonal_check();
+        B_AI_3_in_Diagonal_check();
+        B_AI_4_in_Diagonal_check();
 
         for(int x=0; x<19; x++)
         {
@@ -3638,7 +3638,7 @@ void AI::B_AI_5_6_7_check()
                 if( newblack[x][y] == 2 && newblack[x+1][y-1] == 1 && newblack[x+2][y-2] == 1 && newblack[x+3][y-3] == 1 && newblack[x+4][y-4] == 1 &&
                     newblack[x+5][y-5] == 1 && newblack[x+6][y-6] == 2 )
                     act2[m][n] = 0;
-                //222222가로로 이길수있을때
+                //111111가로로 이길수있을때
                 if( newblack[x][y] == 1 && newblack[x][y+1] == 1 && newblack[x][y+2] == 1 && newblack[x][y+3] == 1 && newblack[x][y+4] == 1 &&
                     newblack[x][y+5] == 1 )
                     act2[m][n] += 99999999999;
@@ -3660,7 +3660,7 @@ void AI::B_AI_5_6_7_check()
         }
 }
 
-void AI::B_AI_2_garo_check()
+void AI::B_AI_2_Horizontal_check()
 {
     for(int m=0 ; m<19 ; m++)
         {
@@ -3795,7 +3795,7 @@ void AI::B_AI_2_garo_check()
         }
 }
 
-void AI::B_AI_3_garo_check()
+void AI::B_AI_3_Horizontal_check()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -3998,7 +3998,7 @@ void AI::B_AI_3_garo_check()
 
 }
 
-void AI::B_AI_4_garo_check()
+void AI::B_AI_4_Horizontal_check()
 {
     for(int m=0 ; m<19 ; m++)
         {
@@ -4216,7 +4216,7 @@ void AI::B_AI_4_garo_check()
 
 }
 
-void AI::B_AI_2_sero_check()
+void AI::B_AI_2_Vertical_check()
 {
     for(int m=0 ; m<19 ; m++)
         {
@@ -4352,7 +4352,7 @@ void AI::B_AI_2_sero_check()
 
 }
 
-void AI::B_AI_3_sero_check()
+void AI::B_AI_3_Vertical_check()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -4555,7 +4555,7 @@ void AI::B_AI_3_sero_check()
 
 }
 
-void AI::B_AI_4_sero_check()
+void AI::B_AI_4_Vertical_check()
 {
     for(int m=0 ; m<19 ; m++)
         {
@@ -4773,7 +4773,7 @@ void AI::B_AI_4_sero_check()
 
 }
 
-void AI::B_AI_2_slash_check()
+void AI::B_AI_2_Diagonal_check()
 {
     for(int m=0 ; m<19 ; m++)
         {
@@ -4909,7 +4909,7 @@ void AI::B_AI_2_slash_check()
 
 }
 
-void AI::B_AI_3_slash_check()
+void AI::B_AI_3_Diagonal_check()
 {
     for(int m=0 ; m<19 ; m++)
         {
@@ -5112,7 +5112,7 @@ void AI::B_AI_3_slash_check()
 
 }
 
-void AI::B_AI_4_slash_check()
+void AI::B_AI_4_Diagonal_check()
 {
     for(int m=0 ; m<19 ; m++)
         {
@@ -5330,7 +5330,7 @@ void AI::B_AI_4_slash_check()
 
 }
 
-void AI::B_AI_2_in_slash_check()
+void AI::B_AI_2_in_Diagonal_check()
 {
     for(int m=0 ; m<19 ; m++)
         {
@@ -5466,7 +5466,7 @@ void AI::B_AI_2_in_slash_check()
 
 }
 
-void AI::B_AI_3_in_slash_check()
+void AI::B_AI_3_in_Diagonal_check()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -5669,7 +5669,7 @@ void AI::B_AI_3_in_slash_check()
 
 }
 
-void AI::B_AI_4_in_slash_check()
+void AI::B_AI_4_in_Diagonal_check()
 {
     for(int m=0 ; m<19 ; m++)
         {
@@ -5886,7 +5886,7 @@ void AI::B_AI_4_in_slash_check()
 
 }
 
-void AI::defense_garo_check_B()
+void AI::defense_Horizontal_check_B()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -6083,7 +6083,7 @@ void AI::defense_garo_check_B()
 
 }
 
-void AI::defense_sero_check_B()
+void AI::defense_Vertical_check_B()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -6280,7 +6280,7 @@ void AI::defense_sero_check_B()
 
 }
 
-void AI::defense_slash_check_B()
+void AI::defense_Diagonal_check_B()
 {
     for(int m=0 ; m<19 ; m++)
         {
@@ -6478,7 +6478,7 @@ void AI::defense_slash_check_B()
 
 }
 
-void AI::defense_in_slash_check_B()
+void AI::defense_in_Diagonal_check_B()
 {
     for(int m=0 ; m<19 ; m++)
     {
@@ -6674,13 +6674,6 @@ void AI::defense_in_slash_check_B()
     }
 
 }
-
-
-
-
-
-
-
 
 
 
