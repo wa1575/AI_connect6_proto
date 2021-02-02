@@ -5,6 +5,7 @@
 
 #include <QWidget>
 #include <QGridLayout>
+#include <iostream>
 #include "ai.h"
 #include "board.h"
 #include "client.h"

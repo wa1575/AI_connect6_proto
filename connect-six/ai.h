@@ -25,6 +25,7 @@ class AI : public QLabel
     friend class Board;
     friend class Item;
     Q_OBJECT
+
 public:
     enum gameType{
         TYPE_LOCAL=0,
@@ -76,12 +77,11 @@ private:
 
     // AI 변수
     int i, j, z, bx, by, wx, wy, n;
-    int actpnt; // AI 활동 가중치 변수
-    int maxactpnt; // 2차원 배열의 가중치 최대값을 저장하는 변수
-    long int act[19][19];	//좌표마다 가중치 점수 저장하는 배열
-    long int act2[19][19];
-    int newwhite[19][19];	//바둑돌이 놓여지는 b, w배열에서 가중치를 판단하기 위한 추가배열
-    int newblack[19][19];
+    int max_weight; // 2차원 배열의 가중치 최대값을 저장하는 변수
+    long int W_weight[19][19];	//좌표마다 가중치 점수 저장하는 배열
+    long int B_weight[19][19];
+    int if_w[19][19];	//바둑돌이 놓여지는 b, w배열에서 가중치를 판단하기 위한 추가배열
+    int if_b[19][19];
     int turn;	//첫 번째 턴인지 두 번째 턴인지 구분해주는 함수이다.
 
     void W_AI_allcheck();

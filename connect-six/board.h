@@ -13,7 +13,7 @@
 
 using namespace std;
 
-/** 육목판 크기 */
+// 육목판 크기
 #define MAX_X 19
 #define MAX_Y 19
 #define MAX_ITEMS MAX_Y*MAX_X
@@ -34,39 +34,6 @@ class Board : public QWidget
 	friend class Item;
     Q_OBJECT
 public:
-
-    /*!
-     *
-     *  \enum gameType
-     *  \brief 프로그램이 계속 수행할 역할
-     *
-     *  2인용 PC/ 클라이언트/ 서버 게임
-     *
-     *	\fn Board::Board (QWidget  *parent = NULL)
-     *  \brief Konstruktor
-     *
-     *  플레이 영역 초기화 및 필요한 변수 설정
-     *
-     *  \param[in] parent는 Qt 자체가 부모 클래스를 삭제할 때 객체 할당 해제를 처리하도록합니다
-     *
-     *  \fn Board::~Board ()
-     *  \brief 소멸자
-     *
-     *  \var Board::gameType
-     *  \brief 프로그램이 게임에서 수행할 역할
-     *
-     *  \var Board::activeType
-     *  \brief 플레이 턴
-     *
-     *  \var Board::server
-     *  \brief 서버 디렉토리
-     *
-     *  \var Board::client
-     *  \brief 클라이언트 포인터
-     *
-     *  \var Board::score
-     *  \brief 점수 정보 필드
-     */
 
 	enum gameType{
 		TYPE_LOCAL=0,

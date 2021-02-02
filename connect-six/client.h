@@ -22,38 +22,6 @@ public:
 
 signals:
 
-    /*!
-     *
-     *  \fn Client::move (int, int)
-     *  \brief 네트워크에서 이동이있을 때 호출됩니다.
-     *  \param[in] x - 필드의 X 좌표
-     *  \param[in] y - 필드의 Y 좌표
-     *
-     *  \fn Client::connectionStatus (int)
-     *  \brief 연결 / 연결 해제를 나타냅니다.
-     *  \param[in] x - 연결 해제 / 연결됨
-     *
-     *  \fn Client::reset_net (void)
-     *  \brief 게임을 초기화하는 서버 명령을 나타냅니다.
-     *
-     *  \fn Board::NewGamePressed (int)
-     *  \brief 새 게임 버튼을 누를 때 호출됩니다
-     *  \param[in] x 창에서 버튼을 비활성화 / 활성화합니다.
-     *
-     *  \fn Client::moveBack (void)
-     *  \brief 이동을 반환하는 서버 명령을 나타냅니다
-     *
-     *  \fn Client::statusChanged (int)
-     *  \brief 각 이동 / 승리 / 무승부 후 상태 변경을 나타냅니다.
-     *  \param[in] 이벤트 신호 상태
-     *
-     *  \fn Client::buttonPressed (int)
-     *  \brief 아무 버튼이나 눌렀 음을 나타냅니다.
-     *  \param[in] x 누르기 비활성화 / 누르기 활성화
-     *
-     */
-
-
 	void move (const int&, const int&);
 	void connectionStatus (const int&);
 	void reset_net (void);

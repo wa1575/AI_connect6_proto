@@ -1,11 +1,6 @@
 #ifndef ITEM_H
 #define ITEM_H
 
-/*! \class Item
- *  \brief Item
- *
- *  게임판생성
- */
 
 #include <QLabel>
 
