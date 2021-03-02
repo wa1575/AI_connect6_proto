@@ -1,1 +1,1 @@
-# bob_connect6
+# AI_connect6_proto
