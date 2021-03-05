@@ -1,5 +1,5 @@
 # AI_connect6_proto
-## development
+## DEV
 Language : C++
 dev.Env  : QT
 Build    : MinGW-64bit
