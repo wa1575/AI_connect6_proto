@@ -6693,6 +6693,4 @@ void AI::clear (void){
             this->w[i][19] = 3;
         }
 
-
 }
-
